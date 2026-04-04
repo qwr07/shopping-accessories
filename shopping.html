@@ -1,0 +1,421 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Accessories</title>
+        <style>
+            body{
+                background: linear-gradient(to right,#f5f5f5,#ffe6ef);
+                font-family: Arial ,sans-serif;
+                text-align: center;
+                margin: 0;
+                padding: 0;
+            }
+            .product-container{
+                display: grid;
+                grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+                gap: 20px;
+                padding: 20px;
+                max-width: 1200px;
+                margin: 0 auto;
+                transition: 0.3s;
+            }
+            .price{
+                margin-top: 5px;
+                margin-bottom: 10px;
+                font-size: 18px;
+                color: #ff4d7d;
+                font-weight: bold;
+            }
+            .card{
+                background: rgb(252, 249, 249);
+                padding: 20px;
+                border: 1px solid #ccc;
+                border-radius: 50px;
+                overflow: hidden;
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                height: auto;
+
+            }
+            .card:hover{
+                transform: translateY(-10px) scale(1.03);
+                box-shadow: 0 8px 16px rgba(0,0,0,0.2);
+            }
+           .card img{
+                width: 150px;
+                height: 110px;
+                object-fit: contain;
+                margin-bottom: 10px;
+            }
+            button{
+                background:linear-gradient(to right,#724855,#4e3a40);
+                color: white;
+                border: none;
+                padding: 10px 15px;
+                cursor: pointer;
+                margin-top: 10px;
+                border-radius: 25px;
+                transition: background-color 0.2s ,color 0.2s;
+            }
+            button:hover{
+                color: black;
+                opacity: 0.8;
+
+            }
+             h1{
+                 font-size: 40px;
+                 font-weight: bold;
+                 margin-top: 30px;
+                 margin-bottom: 50px;
+                 text-align: center;
+                 background: linear-gradient(to right,#ff7aa2,#4e3a40);
+                 background-clip: text;
+                 -webkit-background-clip: text;
+                 -webkit-text-fill-color: transparent;
+                 letter-spacing: 3px;
+                  opacity: 0;
+                 transform: translateY(-30px);
+                 animation: fadeDown 1s ease forwards;
+      }
+
+         @keyframes fadeDown{
+          to{
+        opacity: 1;
+        transform: translateY(0);
+           }
+}
+            h2{
+                font-size: 18px;
+                color: #333;
+            }
+            h3{
+                margin: 10px 0 5px 0;
+            }
+            p{
+                margin: 0;
+                font-weight: bold;
+                color: #777;
+            }
+            #cart{
+                position: fixed;
+                top: 20px;
+                left: 20px;
+                background: white;
+                padding: 15px;
+                border-radius: 15px;
+                width: 250px;
+                box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+
+            }
+            #cart button{
+                background: #ff4d7d;
+                margin-left: 10px;
+                padding: 5px 10px;
+                border-radius: 10px;
+            }
+            .rating{
+                text-align: center;
+                margin: 5px 0;
+                display: flex;
+                justify-content: center;
+                gap:5px;
+                cursor: pointer;
+            }
+            .rating span{
+                font-size: 22px;
+                color: gray;
+                cursor: pointer;
+            }
+            .star{
+                color: #ccc;
+                transition: color 0.3s, transform 0.2s;
+            }
+            .star:hover,
+            .star.selected{
+                color: gold;;
+            }
+            .star:active{
+                transform: scale(1.2);
+            }
+            .rating-value{
+                text-align: center;
+                font-size: 14px;
+                margin-top: 10px;
+            }
+            #toast{
+                position: fixed;
+                bottom: 20px;
+                right: 20px;
+                background: #4e3a40;
+                color: white;
+                padding: 12px 20px;
+                border-radius: 15px;
+                opacity: 0;
+                transform: translateY(20px);
+                transition: 0.4s;
+                font-weight: bold;
+            }
+            #count{
+                display: inline-block;
+                transition: 0.2s;
+            }
+        </style>
+    </head>
+    <body>
+        <h1>✨ Shopping Accessories ✨</h1>
+        <div id="cart">
+            <h2>Cart(<span id="count">0</span>)</h2>
+            <ul id="cart-items"></ul>
+            <p>Total: <span id="total">0</span></p>
+            <div id="toast"></div>
+        </div>
+        <div class="product-container">
+            <div class="card">
+            <img src="gold_earrings.jpg" alt="Gold Earrings">
+            <h3>Gold Earrings</h3>
+            <p class="price">10 R.S</p>
+             <div class="rating">
+        <span class="star" data-value="1">&#9733;</span>
+        <span class="star" data-value="2">&#9733;</span>
+        <span class="star" data-value="3">&#9733;</span>
+        <span class="star" data-value="4">&#9733;</span>
+        <span class="star" data-value="5">&#9733;</span>
+    </div>
+
+    <div class="rating-value">التقييم: 0</div>
+            <button onclick="addToCart('Gold Earrings', 10)">Add to Cart</button>
+            </div>
+        <div class="card">
+            <img src="ee.jpg" alt="Red Earring">
+            <h3>Red Earring</h3>
+            <p class="price">15 R.S</p>
+             <div class="rating">
+         <span class="star" data-value="1">&#9733;</span>
+        <span class="star" data-value="2">&#9733;</span>
+        <span class="star" data-value="3">&#9733;</span>
+        <span class="star" data-value="4">&#9733;</span>
+        <span class="star" data-value="5">&#9733;</span>
+    </div>
+
+    <div class="rating-value">التقييم: 0</div>
+            <button onclick="addToCart('Red Earring', 15)">Add to Cart</button>
+        </div>
+        <div class="card">
+            <img src="bl.jpg" alt="Blue Earring">
+            <h3>Blue Earring</h3>
+            <p class="price">10 R.S</p>
+             <div class="rating">
+         <span class="star" data-value="1">&#9733;</span>
+        <span class="star" data-value="2">&#9733;</span>
+        <span class="star" data-value="3">&#9733;</span>
+        <span class="star" data-value="4">&#9733;</span>
+        <span class="star" data-value="5">&#9733;</span>
+    </div>
+
+    <div class="rating-value">التقييم: 0</div>
+            <button onclick="addToCart('Blue Earring', 10)">Add to Cart</button>
+        </div>
+        <div class="card">
+            <img src="download ss(6).jpg" alt="Silver and Pink Earring">
+            <h3>Silver and Pink Earring</h3>
+            <p class="price">15 R.S</p>
+             <div class="rating">
+         <span class="star" data-value="1">&#9733;</span>
+        <span class="star" data-value="2">&#9733;</span>
+        <span class="star" data-value="3">&#9733;</span>
+        <span class="star" data-value="4">&#9733;</span>
+        <span class="star" data-value="5">&#9733;</span>
+    </div>
+
+    <div class="rating-value">التقييم: 0</div>
+            <button onclick="addToCart('silver_pink', 15)">Add to Cart</button>
+        </div>
+         <div class="card">
+            <img src="thomas sabo ring.jpg" alt="Silver Ring">
+            <h3>Silver Ring</h3>
+            <p class="price">20 R.S</p>
+             <div class="rating">
+         <span class="star" data-value="1">&#9733;</span>
+        <span class="star" data-value="2">&#9733;</span>
+        <span class="star" data-value="3">&#9733;</span>
+        <span class="star" data-value="4">&#9733;</span>
+        <span class="star" data-value="5">&#9733;</span>
+    </div>
+
+    <div class="rating-value">التقييم: 0</div>
+            <button onclick="addToCart('silver_ring', 20)">Add to Cart</button>
+         </div>
+         <div class="card">
+            <img src="ROXI Light Luxury Jewelry 925 Sterling.jpg" alt="Star Ring">
+            <h3>Star Ring</h3>
+            <p class="price">25 R.S</p>
+             <div class="rating">
+         <span class="star" data-value="1">&#9733;</span>
+        <span class="star" data-value="2">&#9733;</span>
+        <span class="star" data-value="3">&#9733;</span>
+        <span class="star" data-value="4">&#9733;</span>
+        <span class="star" data-value="5">&#9733;</span>
+    </div>
+
+    <div class="rating-value">التقييم: 0</div>
+            <button onclick="addToCart('star_ring', 25)">Add to Cart</button>
+         </div>
+         <div class="card">
+            <img src="oo.jpg" alt="Gold Necklace">
+            <h3>Gold Necklace</h3>
+            <p class="price">30 R.S</p>
+             <div class="rating">
+         <span class="star" data-value="1">&#9733;</span>
+        <span class="star" data-value="2">&#9733;</span>
+        <span class="star" data-value="3">&#9733;</span>
+        <span class="star" data-value="4">&#9733;</span>
+        <span class="star" data-value="5">&#9733;</span>
+    </div>
+
+    <div class="rating-value">التقييم: 0</div>
+            <button onclick="addToCart('gold_necklace', 30)">Add to Cart</button>
+         </div>
+         <div class="card">
+            <img src="download (7).jpg" alt="Silver Necklace">
+            <h3>Silver Necklace</h3>
+            <p class="price">25 R.S</p>
+             <div class="rating">
+         <span class="star" data-value="1">&#9733;</span>
+        <span class="star" data-value="2">&#9733;</span>
+        <span class="star" data-value="3">&#9733;</span>
+        <span class="star" data-value="4">&#9733;</span>
+        <span class="star" data-value="5">&#9733;</span>
+    </div>
+
+    <div class="rating-value">التقييم: 0</div>
+            <button onclick="addToCart('silver_necklace', 25)">Add to Cart</button>
+         </div>
+         <div class="card">
+            <img src="QW.jpg" alt="Silver Watch">
+            <h3>Silver Watch</h3>
+            <p class="price">50 R.S</p>
+             <div class="rating">
+         <span class="star" data-value="1">&#9733;</span>
+        <span class="star" data-value="2">&#9733;</span>
+        <span class="star" data-value="3">&#9733;</span>
+        <span class="star" data-value="4">&#9733;</span>
+        <span class="star" data-value="5">&#9733;</span>
+    </div>
+
+    <div class="rating-value">التقييم: 0</div>
+            <button onclick="addToCart('silver_watch', 50)">Add to Cart</button>
+         </div>
+         <div class="card">
+            <img src="graff.jpg" alt="Silver Bracelet">
+            <h3>Silver Bracelet</h3>
+            <p class="price">40 R.S</p>
+            <div class="rating">
+         <span class="star" data-value="1">&#9733;</span>
+        <span class="star" data-value="2">&#9733;</span>
+        <span class="star" data-value="3">&#9733;</span>
+        <span class="star" data-value="4">&#9733;</span>
+        <span class="star" data-value="5">&#9733;</span>
+    </div>
+
+    <div class="rating-value">التقييم: 0</div>
+            <button onclick="addToCart('silver_bracelet', 40)">Add to Cart</button>
+         </div>
+         <div class="card">
+            <img src="CM.jpg" alt="Gold Bracelet">
+            <h3>Gold Bracelet</h3>
+            <p class="price">45 R.S</p>
+             <div class="rating">
+         <span class="star" data-value="1">&#9733;</span>
+        <span class="star" data-value="2">&#9733;</span>
+        <span class="star" data-value="3">&#9733;</span>
+        <span class="star" data-value="4">&#9733;</span>
+        <span class="star" data-value="5">&#9733;</span>
+    </div>
+
+    <div class="rating-value">التقييم: 0</div>
+            <button onclick="addToCart('gold_bracelet', 45)">Add to Cart</button>
+         </div>
+         <div class="card">
+            <img src="DF.jpg" alt="Gold Watch">
+            <h3>Gold Watch</h3>
+            <p class="price">50 R.S</p>
+             <div class="rating">
+         <span class="star" data-value="1">&#9733;</span>
+        <span class="star" data-value="2">&#9733;</span>
+        <span class="star" data-value="3">&#9733;</span>
+        <span class="star" data-value="4">&#9733;</span>
+        <span class="star" data-value="5">&#9733;</span>
+    </div>
+
+    <div class="rating-value">التقييم: 0</div>
+            <button onclick="addToCart('gold_watch', 50)">Add to Cart</button>
+         </div>
+        </div>
+            <script>
+        let cart=[];
+             function addToCart(name , price){
+                cart.push({name, price});
+                showToast(name + " added 🛍️");
+                document.getElementById("count").style.transform="scale(1.3)";
+                setTimeout(() => {
+                    document.getElementById("count").style.transform="scale(1)";
+                }, 200);
+                updateCart();
+             }
+             function updateCart(){
+                 const list= document.getElementById("cart-items");
+                 list.innerHTML="";
+                 let total=0;
+                 cart.forEach(item =>{
+                     const li=document.createElement("li");
+                     li.textContent = `🛍️ ${item.name} - ${item.price} R.S `;
+                     const btn =document.createElement("button");
+                     btn.textContent="Remove";
+                     btn.onclick=() =>{
+                         const index = cart.indexOf(item);
+                         cart.splice(index, 1);
+                         updateCart();
+                     };
+                      li.appendChild(btn);
+                    list.appendChild(li);
+                    total += item.price;
+            });
+                    document.getElementById("count").textContent = cart.length;
+                    document.getElementById("total").textContent = total + " R.S";
+
+        }
+             document.querySelectorAll(".card").forEach(product => {
+    const stars =product.querySelectorAll(".star");
+    const ratingBox=product.querySelector(".rating");
+    const ratingValue = product.querySelector(".rating-value");
+    let rating = 0;
+
+    ratingBox.addEventListener("mouseover", e => {
+        if(!e.target.classList.contains("star"))return;
+           stars.forEach(s => s.classList.toggle("selected", s.dataset.value <= e.target.dataset.value));
+        });
+    ratingBox.addEventListener("mouseout", ()=> {
+        stars.forEach(s => s.classList.toggle("selected", s.dataset.value <= rating));
+    });
+    ratingBox.addEventListener("click", e => {
+        if(!e.target.classList.contains("star"))return;
+            rating = e.target.dataset.value;
+            ratingValue.textContent = `التقييم: ${rating}`;
+    });
+});
+
+function showToast(message) {
+    const toast = document.getElementById("toast");
+    toast.textContent = message;
+    toast.style.opacity = "1";
+    toast.style.transform = "translateY(0)";
+    setTimeout(() => {
+        toast.style.opacity = "0";
+        toast.style.transform = "translateY(20px)";
+    }, 3000);
+}
+            </script>
+
+    </body>
+</html>
